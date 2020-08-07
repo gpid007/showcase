@@ -1,33 +1,47 @@
 #!/usr/bin/env bash
 
-# GLOBAL DEFAULTS
+# GLOBALS
 findDir='.'
 prefix='audiofile_'
 suffix='.wav'
+sortType='g'
 creation=''
+fileList=''
 counter=0
 
 # PARAMETERS
-while ("$#"); do
+while (( "$#" )); do
     case "$1" in
-        --dir|-d)   findDir="$1"                                ;;
-        --suf|-s)   suffix="$1"                                 ;;
-        --pre|-p)   prefix="$1"                                 ;;
-        *)          echo "Please enter valid parameter flag."   ;;
+        --dir|-d)   shift; findDir="$1"                     ;;
+        --suf|-s)   shift; suffix="$1"                      ;;
+        --pre|-p)   shift; prefix="$1"                      ;;
+        --rev|-r)   sortType='gr'                           ;;
+        *)          echo "Invalid parameter $1"; exit 2     ;;
     esac
     shift
 done
 
-
+# MAIN
 if [ ! -d "$findDir" ]; then
     echo "Cannot stat '$findDir': No such directory"
-    return 2
+    exit 2
 fi
 
-# find                    \
-#     "$findDir"          \
-#     -type f             \
-#     -iname "*$suffix"
-# stat -c %y $filePath | awk '{print $1}'
+fileList=$(                         \
+    find                            \
+        "$findDir"                  \
+        -type f                     \
+        -iname "*$suffix"           \
+        -printf "%p %CY-%Cm-%Cd\n"  \
+    | sort -"$sortType"
+)
+
+for file in $fileList; do
+    echo "$"
+done
+
+# stat -c %y $fileList | awk '{print $1}'
 # printf "%03d\n" $counter
 # (( counter++ ))
+
+echo SUCCESS
