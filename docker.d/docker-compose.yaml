@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 
 services:
 
@@ -20,4 +20,12 @@ services:
 
   haProxy:
     container_name: haProxy
-    image: 
+    image: haproxy
+    depends_on:
+      - nginxGreen
+      - nginxBlue
+    ports:
+      - 80:80
+      - 1936:1936
+    volumes:
+      - ./src/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
