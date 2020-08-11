@@ -1,10 +1,23 @@
 version: "3"
 
 services:
-    client:
-        image: nginx
-        ports:
-            - 8000:80
-        volumes:
-            - ./src:/usr/share/nginx/html
 
+  nginxGreen:
+    container_name: nginxGreen
+    image: nginx
+    ports:
+      - 8000:80
+    volumes:
+      - ./src/green.html:/usr/share/nginx/html/index.html
+
+  nginxBlue:
+    container_name: nginxBlue
+    image: nginx
+    ports:
+      - 8001:80
+    volumes:
+      - ./src/blue.html:/usr/share/nginx/html/index.html
+
+  haProxy:
+    container_name: haProxy
+    image: 
