@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
 # GLOBALS
+arr=()
 counter=0
 findDir='.'
+newName=''
 prefix='audiofile'
 sortType='g'
 suffix='.wav'
