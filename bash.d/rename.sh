@@ -44,7 +44,7 @@ find "$findDir" -type f -name "*$suffix" -printf "%p;%CY-%Cm-%Cd\n"     \
 | awk -F';' "{printf \"$printfStr\", \$1,\$2,\$3}"                      \
 | while read line; do
     echo "mv $line"
-    # eval "mv $line"
+    eval "mv $line"
 done
 
 # CREATE DUMMY FILES
