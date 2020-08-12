@@ -52,3 +52,4 @@
         minute: '0'
         hour: '5'
         job: 'pg_dump postgres > /var/lib/postgresql/backup.sql'
+...
