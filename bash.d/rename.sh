@@ -35,7 +35,7 @@ if [ ! -d "$findDir" ]; then
     exit 2
 else
     cd "$findDir"
-    printfStr="'%s' ${findDir}/${prefix}_%s_%03d${suffix}\n"
+    printfStr="\\\"%s\\\" ${findDir}/${prefix}_%s_%03d${suffix}\n"
 fi
 
 find "$findDir" -type f -name "*$suffix" -printf "%p;%CY-%Cm-%Cd\n"     \
@@ -46,6 +46,3 @@ find "$findDir" -type f -name "*$suffix" -printf "%p;%CY-%Cm-%Cd\n"     \
     echo "mv $line"
     eval "mv $line"
 done
-
-# CREATE DUMMY FILES
-# touch 'a a.wav' b.wav c.wav 'd d.wav'
