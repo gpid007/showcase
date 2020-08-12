@@ -5,7 +5,7 @@
   become_user: root
 
   tasks:
-    - name: Install
+    - name: Postgres install
       apt:
         package:
           - postgresql
@@ -13,16 +13,42 @@
         state: latest
         update_cache: yes
 
-    - name: Status
+    - name: Postgres status
       service:
         name=postgresql
         state=started
         enabled=yes
 
-    - name: Network
+    - name: Find postgresql.conf
+      shell: find /etc/postgresql -type f -name postgresql.conf
+      register: confPath
+
+    - name: Postgres listen
+      lineinfile:
+        path:  "{{ confPath.stdout }}"
+        regexp: "^#listen_addresses = 'localhost'"
+        line: "listen_addresses = '10.231.0.0/16' "
+
+    - name: SSHD password
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^PasswordAuthentication yes$'
+        line: 'PasswordAuthentication no'
+
+    - name: SSHD reload
+      shell: systemctl reload ssh
+
+    - name: Network allow
       ufw:
         rule: allow
-        src: "{{ item }}"
-      loop:
-        - 10.231.0.0/16
-        - 80.110.119.203/32
+        src: 10.231.0.0/16
+        port: '5432'
+        proto: tcp
+
+    - name: Cronjob pg_dump
+      cron:
+        name: pg_dump
+        user: postgres
+        minute: '0'
+        hour: '5'
+        job: 'pg_dump postgres > /var/lib/postgresql/backup.sql'
