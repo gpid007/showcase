@@ -39,20 +39,30 @@ else
     findDir=$(realpath "$findDir")
 fi
 
-while read line; do
-    (( counter++ ))
-    arr=($line)
-    newName=$(printf "%s_%s_%03d%s\n" $prefix ${arr[1]} $counter $suffix)
-    echo ${arr[0]} $findDir/$newName
-done < <(
-    find                            \
-        "$findDir"                  \
-        -type f                     \
-        -iname "*$suffix"           \
-        -printf "%p %CY-%Cm-%Cd\n"  \
-    | sort -"$sortType"             \
+# while read line; do
+#     (( counter++ ))
+#     arr=($line)
+#     newName=$(printf "%s_%s_%03d%s\n" $prefix ${arr[1]} $counter $suffix)
+#     echo ${arr[0]} $findDir/$newName
+# done < <(
+#     find                            \
+#         "$findDir"                  \
+#         -type f                     \
+#         -iname "*$suffix"           \
+#         -printf "%p %CY-%Cm-%Cd\n"  \
+#     | sort -"$sortType"             \
+# )
+
+findList=$(                             \
+    find                                \
+        "$findDir"                      \
+        -type f                         \
+        -iname "*$suffix"               \
+        -printf "%p;%CY-%Cm-%Cd\n"      \
+    | sort -g                           \
+    | awk -F';' '{print $0 ";" NR}'     \
 )
 
-if [ $counter -lt 1 ]; then
-    echo "No '*.$suffix' files in '$findDir'"
-fi
+# if [ $counter -lt 1 ]; then
+#     echo "No '*.$suffix' files in '$findDir'"
+# fi
