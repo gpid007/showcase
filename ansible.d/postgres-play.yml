@@ -7,7 +7,9 @@
   tasks:
     - name: Install
       apt:
-        package: postgresql
+        package:
+          - postgresql
+          - postgresql-contrib
         state: latest
         update_cache: yes
 
@@ -16,3 +18,11 @@
         name=postgresql
         state=started
         enabled=yes
+
+    - name: Network
+      ufw:
+        rule: allow
+        src: "{{ item }}"
+      loop:
+        - 10.231.0.0/16
+        - 80.110.119.203/32
