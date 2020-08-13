@@ -1,7 +1,7 @@
 # Technical Assessment
 The following tasks should be completed, and all scripts, docker-compose, and ansible files pushed into a public git repository (eg GitHub). Clear instructions on how to run each of your deliverables should also be included. There are three sections within the technical assessment. There are also "Bonus Tasks" in each section which are optional.
 
-## Project tree structure
+##### Project tree structure
 ```
 .
 ├── ansible.d
