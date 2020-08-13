@@ -30,11 +30,11 @@ The following tasks should be completed, and all scripts, docker-compose, and an
 - implement functionality to rename files in reverse-alphabetical order
 
 ### @1. BASH IMPLEMENTATION
-The _rename_ script can be run using relative or absolute file-pahts `./rename.sh`
+The _rename_ script can be run using relative or absolute file-paths `./rename.sh`
 If no parameters are passed to the script, default values are assumed.
 Default values are declared at the beginning in the `# GLOBALS` section.
 Run `./rename.sh -h` for help.
-This ignores all other parametrs, displays a help message and exits the script.
+This ignores all other parameters, displays a help message and exits the script.
 ```
     PARAMETERS
         --dir, -d   directory-path           -d "."
@@ -75,7 +75,7 @@ Both `nginx` containers have their respective _green_ or _blue_ `index.html`.
 These files are _bound_ _(or mounted)_ to the container.
 Internal ports `8000, 8001` are both exposed to `80`.
 The `haprox` container waits for both `nginx` containers to be up.
-It then listenes to and exposes port `80`.
+It then listens to and exposes port `80`.
 This facilitates simple _round robin load balancing_.
 Open a webbrowser with `http://localhost:80` and refreshing the page.
 All containers are placed within the `webLB` network.
@@ -121,7 +121,7 @@ create a simple ansible project (consisting of a playbook and role(s)) to config
 
 ### @3. ANSIBLE IMPLEMENTATION
 Provided ansible playbook is quite lean.
-It is based on the assumption of having to manage one just one Ubuntu server.
+It is based on the assumption of having to manage just one Ubuntu server.
 This is directly derived from aforementioned requirement specification.
 _"[C]onfigure a remote ubuntu server."_ (Singular)
 
@@ -131,7 +131,7 @@ The playbook runs aforementioned _tasks_ on the Ubuntu host sequentially:
 3. Find the `postgresql.conf` file
 4. Add `10.231.0.0/16` to `liten_addresses`
 5. Disable SSH login via password
-6. Reload the SSH deamon
+6. Reload the SSH daemon
 7. Allow incoming traffic on port `5432` via firewall
 8. Create a cronjob for user `postgres` to run automated backups via `pg_dump`
 
