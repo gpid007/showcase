@@ -7,10 +7,6 @@ The following tasks should be completed, and all scripts, docker-compose, and an
 ├── ansible.d
 │   └── postgres-play.yml
 ├── bash.d
-│   ├── a a.wav
-│   ├── b.wav
-│   ├── c don't.wav
-│   ├── d d.wav
 │   └── rename.sh
 ├── docker.d
 │   ├── docker-compose.yaml
@@ -20,7 +16,7 @@ The following tasks should be completed, and all scripts, docker-compose, and an
 │       └── haproxy.cfg
 └── README.md
 
-4 directories, 11 files
+4 directories, 7 files
 ```
 
 ## 1. PYTHON OR BASH SCRIPTING
