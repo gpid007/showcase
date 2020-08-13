@@ -35,13 +35,13 @@ if [ ! -d "$findDir" ]; then
     exit 2
 else
     cd "$findDir"
-    printfStr="\\\"%s\\\" ${findDir}/${prefix}_%s_%03d${suffix}\n"
+    printfStr="\\\"%s\\\" ${prefix}_%s_%03d${suffix}\n"
 fi
 
-find "$findDir" -type f -name "*$suffix" -printf "%p;%CY-%Cm-%Cd\n"     \
-| sort -"$sortType"                                                     \
-| awk -F';' '{print $0 ";" NR}'                                         \
-| awk -F';' "{printf \"$printfStr\", \$1,\$2,\$3}"                      \
+find '.' -type f -name "*$suffix" -printf "%p;%CY-%Cm-%Cd\n"    \
+| sort -"$sortType"                                             \
+| awk -F';' '{print $0 ";" NR}'                                 \
+| awk -F';' "{printf \"$printfStr\", \$1,\$2,\$3}"              \
 | while read line; do
     echo "mv $line"
     eval "mv $line"

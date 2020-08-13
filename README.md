@@ -37,7 +37,6 @@ The following tasks should be completed, and all scripts, docker-compose, and an
 The _rename_ script can be run using relative or absolute file-pahts `./rename.sh`
 If no parameters are passed to the script, default values are assumed.
 Default values are declared at the beginning in the `# GLOBALS` section.
-For testing purposes empty `wav` files are provided in the `bash.d` directory.
 Run `./rename.sh -h` for help.
 This ignores all other parametrs, displays a help message and exits the script.
 ```
