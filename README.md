@@ -11,6 +11,20 @@ The following tasks should be completed, and all scripts, docker-compose, and an
 - implement argument management, so that directory, prefix and suffix can all be specified at runtime
 - implement functionality to rename files in reverse-alphabetical order
 
+## @1. BASH IMPLEMENTATION
+The _rename_ script can be run from any directory targeting any directory via `./rename.sh`
+If no parameters are passed, default values are assumed.
+Run `./rename.sh -h` for help.
+```
+    INPUT PARAMETERS
+        --dir, -d   directory-path           -d "."
+        --suf, -s   suffix (file-extension)  -s "wav"
+        --pre, -p   prefix                   -p "audiofile"
+        --rev, -r   reverse-sort             -r [blank]
+    EXAMPLE
+        ./rename.sh -d pathToDir -r -p ABBA
+```
+
 ## 2. DOCKER
 Create a Docker-Compose multi-container application, that achieves the following goals:
 - hosts a simple html page on two separate nginx containers
