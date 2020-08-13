@@ -38,7 +38,7 @@
     - name: SSHD reload
       shell: systemctl reload ssh
 
-    - name: Network allow
+    - name: Firewall allow
       ufw:
         rule: allow
         src: 10.231.0.0/16

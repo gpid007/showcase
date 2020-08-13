@@ -27,6 +27,13 @@ This ignores all other parametrs, displays a help message and exits the script.
     EXAMPLE
     ./rename.sh -d "$HOME/music/dir" -r -p 'ABBA_prefix' -s 'mp3'
 ```
+#### DISCLAIMER - TESTED WITH
+```
+GNU bash, version 5.0.17(1)-release (x86_64-pc-linux-gnu)
+Copyright (C) 2019 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+```
+
 
 ## 2. DOCKER
 Create a Docker-Compose multi-container application, that achieves the following goals:
@@ -39,6 +46,7 @@ Create a Docker-Compose multi-container application, that achieves the following
 - configure nginx access logs to be collected and stored in an ElasticSearch docker instance
 - configure kibana to allow viewing these logs from ElasticSearch
 
+
 ## 3. ANSIBLE
 create a simple ansible project (consisting of a playbook and role(s)) to configure a remote ubuntu server:
 - use ansible to install postgresql on target server
@@ -49,3 +57,22 @@ create a simple ansible project (consisting of a playbook and role(s)) to config
 ### Bonus Tasks (optional)
 - use ansible to configure the firewall on the remote server to allow inbound connections on postgres port
 - use ansible to configure a scheduled backup (dump) of the postgresql server
+
+### @3. ANSIBLE IMPLEMENTATION
+Provided ansible playbook is quite lean.
+It is based on the assumption of having to manage one just one Ubuntu server.
+This is directly derived from aforementioned requirement specification.
+_"[C]onfigure a remote ubuntu server."_ (Singular)
+
+The playbook runs aforementioned _tasks_ on the Ubuntu host sequentially:
+1. Install postgres
+2. Ensure postgres is up (state=started)
+3. Find the `postgresql.conf` file
+4. Add `10.231.0.0/16` to `liten_addresses`
+5. Disable SSH login via password
+6. Reload the SSH deamon
+7. Allow incoming traffic on port `5432` via firewall
+8. Create a cronjob for user `postgres` to run automated backups via `pg_dump`
+
+The script should be invoked using the target-host's IP-address:
+`ansible-playbook -i TA.RG.ET.IP, postgres-play.yml`
