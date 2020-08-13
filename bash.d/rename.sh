@@ -31,7 +31,7 @@ done
 
 # MAIN
 if [ ! -d "$findDir" ]; then
-    echo "Cannot stat '$findDir': No such directory"
+    echo "'$findDir': No such directory"
     exit 2
 else
     cd "$findDir"
