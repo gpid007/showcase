@@ -78,6 +78,7 @@ The `haprox` container waits for both `nginx` containers to be up.
 It then listenes to and exposes port `80`.
 This facilitates simple _round robin load balancing_.
 Open a webbrowser with `http://localhost:80` and refreshing the page.
+All containers are placed within the `webLB` network.
 
 ##### Starting the application
 From within the `docker.d` directory run
@@ -95,7 +96,9 @@ done
 
 ##### Stopping containers
 ```bash
-docker kill haProxy nginxBlue nginxGreen
+docker-compose down
+# In case of errors force remove
+docker rm -f haProxy nginxBlue nginxGreen
 ```
 
 ##### Tested with docker and docker-compose

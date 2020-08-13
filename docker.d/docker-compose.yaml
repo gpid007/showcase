@@ -9,6 +9,8 @@ services:
       - 8000:80
     volumes:
       - ./src/green.html:/usr/share/nginx/html/index.html
+    networks:
+      - webLB
 
   nginxBlue:
     container_name: nginxBlue
@@ -17,6 +19,8 @@ services:
       - 8001:80
     volumes:
       - ./src/blue.html:/usr/share/nginx/html/index.html
+    networks:
+      - webLB
 
   haProxy:
     container_name: haProxy
@@ -29,3 +33,8 @@ services:
       - 1936:1936
     volumes:
       - ./src/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+    networks:
+      - webLB
+      
+networks:
+  webLB:
