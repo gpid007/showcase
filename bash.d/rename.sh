@@ -7,7 +7,7 @@ prefix='audiofile'
 sortType='g'
 suffix='.wav'
 helpMsg='
-    INPUT PARAMETERS
+    PARAMETERS
         --dir, -d   directory-path           -d "."
         --suf, -s   suffix (file-extension)  -s "wav"
         --pre, -p   prefix                   -p "audiofile"
