@@ -47,6 +47,38 @@ Create a Docker-Compose multi-container application, that achieves the following
 - configure kibana to allow viewing these logs from ElasticSearch
 
 
+### @2. DOCKER IMPLEMENTATION
+A single docker compose file has been created.
+Three docker containers are launched and run on `localhost`.
+Both `nginx` containers have their respective _green_ or _blue_ `index.html`.
+These files are _bound_ _(or mounted)_ to the container.
+Internal ports `8000, 8001` are both exposed to `80`.
+The `haprox` container waits for both `nginx` containers to be up.
+It then listenes to and exposes port `80`.
+This facilitates simple _round robin load balancing_.
+Open a webbrowser with `http://localhost:80` and refreshing the page.
+
+#### Starting the application
+From within the `docker.d` directory run
+```bash
+docker-compose up -d
+```
+
+#### Testing load-balancing
+```bash
+for i in {1..6}; do
+    curl http://localhost:80
+    sleep 1
+done
+```
+
+#### Stopping containers
+```bash
+docker kill haProxy nginxBlue nginxGreen
+```
+
+
+
 ## 3. ANSIBLE
 create a simple ansible project (consisting of a playbook and role(s)) to configure a remote ubuntu server:
 - use ansible to install postgresql on target server
