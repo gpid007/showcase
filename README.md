@@ -45,7 +45,7 @@ This ignores all other parameters, displays a help message and exits the script.
     ./rename.sh -d "$HOME/music/dir" -r -p 'ABBA_prefix' -s 'mp3'
 ```
 
-##### Execution
+### Starting the rename BASH script
 ```bash
 # Change directory to bash.d
 ./rename.sh
@@ -80,7 +80,7 @@ This facilitates simple _round robin load balancing_.
 Open a webbrowser with `http://localhost:80` and refreshing the page.
 All containers are placed within the `webLB` network.
 
-##### Starting the application
+### Starting the docker-compose application
 From within the `docker.d` directory run
 ```bash
 docker-compose up -d
@@ -135,8 +135,10 @@ The playbook runs aforementioned _tasks_ on the Ubuntu host sequentially:
 7. Allow incoming traffic on port `5432` via firewall
 8. Create a cronjob for user `postgres` to run automated backups via `pg_dump`
 
-The script should be invoked using the target-host's IP-address:
-`ansible-playbook -i TA.RG.ET.IP, postgres-play.yml`
+### Starting the postgres-play.yml using target-IP
+```bash
+ansible-playbook -i TA.RG.ET.IP, postgres-play.yml
+```
 
 
 ##### Tested with Ansible
